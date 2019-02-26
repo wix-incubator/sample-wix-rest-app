@@ -2,9 +2,7 @@
 ### **Overview**
 
 This boilerplate will make it easy for you to [start developing](http://dev.wix.com/) your [Wix app](https://www.wix.com/app-market/main).
-## Description
-
-This project is a sample Wix application that uses oAuth and REST APIs.
+This is a sample Wix application that uses oAuth and REST APIs.
 Clone/download the project, configure your application, run & have fun!
 
 ## Quick start
