@@ -25,18 +25,20 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'statics')));
 
 function getTokensFromWix (authCode) {
-  return axios.post(`${AUTH_PROVIDER_BASE_URL}/refreshTokens`, {
-    authorizationCode: authCode,
-    appSecret: APP_SECRET,
-    appId: APP_ID,
+  return axios.post(`${AUTH_PROVIDER_BASE_URL}/access`, {
+    code: authCode,
+    client_secret: APP_SECRET,
+    client_id: APP_ID,
+    grant_type: "authorization_code",
   }).then((resp) => resp.data);
 }
 
 function getAccessToken (refreshToken) {
-  return axios.post(`${AUTH_PROVIDER_BASE_URL}/accessTokens`, {
-    refreshToken,
-    appSecret: APP_SECRET,
-    appId: APP_ID,
+  return axios.post(`${AUTH_PROVIDER_BASE_URL}/access`, {
+    refresh_token: refreshToken,
+    client_secret: APP_SECRET,
+    client_id: APP_ID,
+    grant_type: "refresh_token",
   }).then((resp) => resp.data);
 }
 
@@ -80,8 +82,8 @@ app.get('/login',async (req, res) => {
     console.log("=======================");
     const data = await getTokensFromWix(authorizationCode);
 
-    refreshToken = data.refreshToken;
-    accessToken = data.accessToken;
+    refreshToken = data.refresh_token;
+    accessToken = data.access_token;
 
     console.log("refreshToken = " + refreshToken);
     console.log("accessToken = " + accessToken);
@@ -110,8 +112,8 @@ app.get('/login',async (req, res) => {
     try {
       console.log('getAppInstance with refreshToken = '+refreshToken);
       console.log("=============================");
-      const {accessToken} = await getAccessToken(refreshToken);
-      console.log('accessToken = ' + accessToken);
+      const {access_token} = await getAccessToken(refreshToken);
+      console.log('accessToken = ' + access_token);
 
       const body = {
         // *** PUT YOUR PARAMS HERE ***
@@ -119,12 +121,12 @@ app.get('/login',async (req, res) => {
       };
       const options = {
         headers: {
-          authorization: accessToken,
+          authorization: access_token,
         },
       };
       const appInstance = axios.create({
         baseURL: INSTANCE_API_URL,
-        headers: {authorization: accessToken}
+        headers: {authorization: access_token}
       });
       const {instance} = (await appInstance.get('instance', body)).data;
 
