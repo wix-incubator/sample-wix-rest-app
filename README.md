@@ -16,7 +16,7 @@ Clone/download the project, configure your application, run & have fun!
 4. In [Wix Developers](http://dev.wix.com/myapps) update your applic ation with the oAuth data:
     * Configure "Redirect URL" in Wix Developpers to https://[Your ngrok identity].ngrok.io/login
     * Configure "App URL" in Wix Developpers to https://[Your ngrok identity].ngrok.io/signup
-5. Run ngrok to get https proxy to your server:
+5. Run ngrok to get https proxy to your server:<br/>
     `ngrok http 3000`
 6. Run your server<br/>
     `npm install`<br/>
