@@ -111,7 +111,7 @@ app.get('/login',async (req, res) => {
   {
     try {
       console.log('getAppInstance with refreshToken = '+refreshToken);
-      console.log("=============================");
+      console.log("==============================");
       const {access_token} = await getAccessToken(refreshToken);
       console.log('accessToken = ' + access_token);
 
