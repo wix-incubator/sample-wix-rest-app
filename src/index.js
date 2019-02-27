@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
 
-// TODO: Update APP_ID with your application id (can be found in in Wix Developpers under Workspace/OAuth)
+// TODO: Update APP_ID with your application ID (can be found in in Wix Developers under Workspace/OAuth)
 const APP_ID = 'a9e09516-230f-4855-9449-698f07061193';
 
-// TODO: Update APP_SECRET with your application secret (can be found in Wix Developpers under Workspace/OAuth)
+// TODO: Update APP_SECRET with your application secret key (can be found in Wix Developers under Workspace/OAuth)
 const APP_SECRET = '8da6959e-7c9e-4775-870b-15ff17069d2c';
 
-// TODO: Update WEBHOOK_VERIFICATION_ID with your WEBHOOK VERIFICATION ID (can be found under Workspace/OAuth)
+// TODO: Update WEBHOOK_VERIFICATION_ID with your WEBHOOK VERIFICATION ID (can be found under Workspace/Webhooks/Public-Key)
 const WEBHOOK_VERIFICATION_ID = '430ba021-fd04-47fe-8f1c-2b8a72331b40';
 
 const AUTH_PROVIDER_BASE_URL = 'https://www.wix.com/oauth';
