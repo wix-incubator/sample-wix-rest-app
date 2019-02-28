@@ -52,6 +52,7 @@ app.post('/webhook-callback', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
+  // This route route is called before the user is asked for a consent - usually your application page will ask him to signup/login to your application
   // *** PUT YOUR SIGNUP CODE HERE *** ///
   console.log("got a call from Wix for signup");
   console.log("==============================");
@@ -68,6 +69,7 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/login',async (req, res) => {
+  // This route route is called once the user finished installing your application and Wix redirecting him to your Application's site (here).
   // *** PUT YOUR LOGIN CODE HERE *** ///
   console.log("got a call from Wix for login");
   console.log("=============================");
@@ -107,6 +109,7 @@ app.get('/login',async (req, res) => {
     return;
   }});
 
+  // this is sample call to Wix instance API - you can find it here: https://dev.wix.com/docs/api/app-instance/guides/Introduction
   async function getAppInstance(refreshToken)
   {
     try {
