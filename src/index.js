@@ -53,6 +53,7 @@ app.post('/webhook-callback', (req, res) => {
 
 app.get('/signup', (req, res) => {
   // This route route is called before the user is asked for a consent - usually your application page will ask him to signup/login to your application
+  // The `Redirect URL` in the Wix Developers should be configured to point here
   // *** PUT YOUR SIGNUP CODE HERE *** ///
   console.log("got a call from Wix for signup");
   console.log("==============================");
@@ -70,6 +71,7 @@ app.get('/signup', (req, res) => {
 
 app.get('/login',async (req, res) => {
   // This route route is called once the user finished installing your application and Wix redirecting him to your Application's site (here).
+  // The `App URL` in the Wix Developers should be configured to point here
   // *** PUT YOUR LOGIN CODE HERE *** ///
   console.log("got a call from Wix for login");
   console.log("=============================");
