@@ -102,7 +102,17 @@ app.get('/login',async (req, res) => {
     console.log("=============================");
     console.log("User's site instanceId: = " + instance.instanceId);
     console.log("=============================");
-    res.status(200).send("Application " + APP_ID + " was successfully installed on user's site with instanceId = " + instance.instanceId);
+    res.status(200).send(
+      `<HTML>
+      <HEAD>
+        <TITLE>Wix Application</TITLE>
+      </HEAD>
+      <BODY>
+      <H1>Application ${APP_ID}</H1>
+      <h2>Successfully installed on user's site with instanceId = ${instance.instanceId}<h2>
+      <h2>Application permissions = ${instance.permissions}<h2>
+      </BODY>
+      </HTML>`);
 
   } catch (wixError) {
     console.log("Error getting token from Wix");
