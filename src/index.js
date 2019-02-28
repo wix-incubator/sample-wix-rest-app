@@ -4,10 +4,10 @@ const express = require('express');
 const path = require('path');
 
 // TODO: Update APP_ID with your application ID (can be found in in Wix Developers under Workspace/OAuth)
-const APP_ID = 'ce17e149-8f3c-4c4c-a527-e277ac3100a1';
+const APP_ID = '6675f66b-b3ba-4207-9858-d9bf8eca8622';
 
 // TODO: Update APP_SECRET with your application secret key (can be found in Wix Developers under Workspace/OAuth)
-const APP_SECRET = '008a6dee-e695-49e0-8e88-8a8e510ee76a';
+const APP_SECRET = '2787a489-c528-4970-8968-988c371d0d9e';
 
 // TODO: Update WEBHOOK_VERIFICATION_ID with your WEBHOOK VERIFICATION ID (can be found under Workspace/Webhooks/Public-Key)
 const WEBHOOK_VERIFICATION_ID = '430ba021-fd04-47fe-8f1c-2b8a72331b40';
