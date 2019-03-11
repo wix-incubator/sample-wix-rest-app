@@ -60,7 +60,7 @@ app.get('/signup', (req, res) => {
   const appId = APP_ID;
   const redirectUrl = `https://${req.get('host')}/login`;
   const token = req.query.token;
-  url = `${permissionRequestUrl}?token=${token}&appId=${appId}&redirectUrl=${redirectUrl}`
+  var url = `${permissionRequestUrl}?token=${token}&appId=${appId}&redirectUrl=${redirectUrl}`
 
   console.log("redirecting to " + url);
   console.log("=============================");
@@ -149,7 +149,7 @@ app.get('/instance',async (req, res) => {
         <title>Wix Application</title>
       </head>
       <body>
-        <H1>Application ${APP_ID}</H1>
+        <h1>Application ${APP_ID}</h1>
         <h3>User's site name = ${instance.site.siteDisplayName}<h2>
         <h3>User's site with instanceId = ${instance.instance.instanceId}<h2>
         <pre>${JSON.stringify(instance, null, '\t')}</pre>
@@ -180,7 +180,7 @@ app.get('/products',async (req, res) => {
           <title>Wix Application</title>
         </head>
         <body>
-          <H1>Application ${APP_ID}</H1>
+          <h1>Application ${APP_ID}</h1>
           <h3>Number of products in the Store is ${storeProducts.totalResults}<h3>
           <h3>The Wix Store's products:<h3>
           <pre>${JSON.stringify(storeProducts.products, null, "\t")}</pre>
@@ -228,7 +228,7 @@ app.get('/orders',async (req, res) => {
           <title>Wix Application</title>
         </head>
         <body>
-          <H1>Application ${APP_ID}</H1>
+          <h1>Application ${APP_ID}</h1>
           <h3>Number of orders in the Store is ${storeOrders.totalResults}<h3>
           <pre>${JSON.stringify(storeOrders, null, "\t")}</pre>
         </body>
@@ -275,7 +275,7 @@ app.get('/payments',async (req, res) => {
           <title>Wix Application</title>
         </head>
         <body>
-          <H1>Application ${APP_ID}</H1>
+          <h1>Application ${APP_ID}</h1>
           <h3>Number of payments in the site is ${transactions.pagination.total}<h3>
           <pre>${JSON.stringify(transactions, null, "\t")}</pre>
         </body>
@@ -411,4 +411,4 @@ async function getPayments(refreshToken)
 };
 app.get('/', (_, res) => res.status(200).send('Hello Wix!'));
 
-app.listen(port, () => console.log(`My Wix Application with Store is listening on port ${port}!`));
+app.listen(port, () => console.log(`My Wix Application ${APP_ID} is listening on port ${port}!`));
