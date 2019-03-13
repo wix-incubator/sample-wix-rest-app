@@ -3,9 +3,10 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
 const config = require('./config');
+const credentials = require('./credentials')
 
 const APP_ID = config.APP_ID;
-const APP_SECRET = config.APP_SECRET;
+const APP_SECRET = credentials.APP_SECRET;
 const WEBHOOK_VERIFICATION_ID = config.WEBHOOK_VERIFICATION_ID;
 const AUTH_PROVIDER_BASE_URL = 'https://www.wix.com/oauth';
 const INSTANCE_API_URL = 'https://dev.wix.com/api/v1';
