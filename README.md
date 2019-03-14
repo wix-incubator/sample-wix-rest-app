@@ -13,13 +13,13 @@ Clone/download the project, configure your application, run & have fun!
     A. In the config.js:  
         - Update APP_ID with your application ID  
         - Update WEBHOOK_VERIFICATION_ID with your WEBHOOK VERIFICATION ID  
-    B. In the credentials.js 
+    B. In the credentials.js   
         - Update APP_SECRET with your application secret key
-4. Run ngrok to get https proxy to your server:<br/>
+4. [Optional] If you are running on a local machine and/or don't have a local https certificate, run ngrok to get https proxy to your server:<br/>
     `ngrok http 3000`
-5. In [Wix Developers](http://dev.wix.com/myapps) update your application with the oAuth data:
-    * Configure "Redirect URL" in Wix Developpers to https://[Your ngrok identity].ngrok.io/login
-    * Configure "App URL" in Wix Developpers to https://[Your ngrok identity].ngrok.io/signup
+5. In [Wix Developers](http://dev.wix.com/myapps), update your application with the oAuth data:
+    * Configure "Redirect URL" (for example: https://[Your ngrok identity].ngrok.io/login )
+    * Configure "App URL" (for example: https://[Your ngrok identity].ngrok.io/signup )
 6. Run your server<br/>
     `npm install`<br/>
     `npm build`<br/>
