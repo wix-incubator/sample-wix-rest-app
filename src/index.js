@@ -51,8 +51,8 @@ app.post('/webhook-callback', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
-  // This route route is called before the user is asked for a consent - usually your application page will ask him to signup/login to your application
-  // The `Redirect URL` in the Wix Developers should be configured to point here
+  // This route  is called before the user is asked to provide consent
+  // Configure the `Redirect URL` in  Wix Developers to point here
   // *** PUT YOUR SIGNUP CODE HERE *** ///
   console.log("got a call from Wix for signup");
   console.log("==============================");
@@ -69,8 +69,8 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/login',async (req, res) => {
-  // This route route is called once the user finished installing your application and Wix redirecting him to your Application's site (here).
-  // The `App URL` in the Wix Developers should be configured to point here
+  // This route  is called once the user finished installing your application and Wix redirects them to your application's site (here).
+  // Configure the `App URL` in the Wix Developers to point here
   // *** PUT YOUR LOGIN CODE HERE *** ///
   console.log("got a call from Wix for login");
   console.log("=============================");
@@ -97,7 +97,7 @@ app.get('/login',async (req, res) => {
     console.log("api call to instance returned: ");
     console.log(instance);
 
-    // TODO: save instaceId and the tokens for future API calls
+    // TODO: Save the instanceId and tokens for future API calls
     console.log("=============================");
     console.log(`User's site instanceId: ${instance.instance.instanceId}`);
     console.log("=============================");
@@ -332,7 +332,7 @@ async function getAppInstance(refreshToken)
   }
 };
 
-// this is sample call to Wix Product API - you can find it here: https://dev.wix.com/docs/api//stores-catalog/reference/product/query-products
+// This is a sample call to the Wix Product API - you can find it here: https://dev.wix.com/docs/api//stores-catalog/reference/product/query-products
 async function getProducts(refreshToken)
 {
   try {
@@ -359,7 +359,7 @@ async function getProducts(refreshToken)
   }
 };
 
-// this is sample call to Wix Orders API - you can find it here: https://dev.wix.com/docs/api//stores-orders/reference/order--v2/v2-query-orders
+// This is sample call to the Wix Orders API - you can find it here: https://dev.wix.com/docs/api//stores-orders/reference/order--v2/v2-query-orders
 async function getOrders(refreshToken)
 {
   try {
@@ -385,7 +385,7 @@ async function getOrders(refreshToken)
   }
 };
 
-// this is sample call to Wix Payments API - you can find it here: https://dev.wix.com/docs/api//payments/reference/transaction/transactions-list
+// This is a sample call to the Wix Payments API - you can find it here: https://dev.wix.com/docs/api//payments/reference/transaction/transactions-list
 async function getPayments(refreshToken)
 {
   try {
