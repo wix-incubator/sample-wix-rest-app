@@ -12,8 +12,8 @@ Clone/download the project, configure your application, run & have fun!
 3. Update your application data:  
     A. In the config.js:  
         - Update APP_ID with your application ID  
-        - Update WEBHOOK_VERIFICATION_ID with your WEBHOOK VERIFICATION ID  
-    B. In the credentials.js   
+        ******* - Update PUBLIC_KEY with your your public key  
+    B. In the credentials.js:   
         - Update APP_SECRET with your application secret key
 4. [Optional] If you are running on a local machine and/or don't have a local https certificate, run ngrok to get https proxy to your server:<br/>
     `ngrok http 3000`
