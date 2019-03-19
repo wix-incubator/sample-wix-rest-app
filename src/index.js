@@ -112,27 +112,26 @@ app.get('/login',async (req, res) => {
         <title>Wix Application</title>
       </head>
       <body>
-        <h1>Application ${APP_ID} Successfully installed on user's site - ${instance.site.siteDisplayName}<h1>
-        <h3>User's site instanceId = ${instance.instance.instanceId}<h3>
+        <h1>Your app ${APP_ID} has been successfully intalled on a user's site: ${instance.site.siteDisplayName}<h1>
+        <h3>Your user's site instance ID is: ${instance.instance.instanceId}<h3>
         <p>
-        <h3>Permissions granted by the user  = ${instance.instance.permissions}<h3>
-        <h3>You can add permissions to your application in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/permissions" target="_blank">Wix Developers</a><h3>
+        The user has granted you the following permissions: ${instance.instance.permissions}<br>
+        Request more permissions for your app in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/permissions" target="_blank">Wix Developers</a>
         <p>
-        You can get your user's site data as described <a href="https://dev.wix.com/docs/api/app-instance/guides/Introduction" target="_blank">here</a></br>
-        
-        <a href="/instance?token=${refreshToken}">Instance API</a> test
+        Get your user's site data with the <a href="https://dev.wix.com/docs/api/app-instance/guides/Introduction" target="_blank">App Instance API</a>
+        - <a href="/instance?token=${refreshToken}">test</a>
         <p>
-        You can use the Wix Stores catalog API as described <a href="https://dev.wix.com/docs/api/stores-catalog/guides/Introduction" target="_blank">here</a></br>
-        <a href="/products?token=${refreshToken}">Product API</a> test
+        Access your user's store catalog with the <a href="https://dev.wix.com/docs/api/stores-catalog/guides/Introduction" target="_blank">Wix Stores Catalog API</a>
+        - <a href="/products?token=${refreshToken}">test</a>
         <p>
-        You can use the Wix Stores orders API as described <a href="https://dev.wix.com/docs/api/stores-orders/guides/Introduction" target="_blank">here</a></br>
-        <a href="/orders?token=${refreshToken}">Orders API</a> test
+        Access your user's store orders with the <a href="https://dev.wix.com/docs/api/stores-orders/guides/Introduction" target="_blank">Wix Stores Orders API</a>
+        - <a href="/orders?token=${refreshToken}">test</a>
         <p>
-        You can use the Wix payments API as described <a href="https://dev.wix.com/docs/api/payments/guides/Introduction" target="_blank">here</a></br>
-        <a href="/payments?token=${refreshToken}">Payments API</a> test
+        Access your user's paid transactions with the <a href="https://dev.wix.com/docs/api/payments/guides/Introduction" target="_blank">Wix Payments API</a>
+        - <a href="/payments?token=${refreshToken}">test</a>
         <p>
-        You can register for webhooks to receive events from Wix <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/webhooks" target="_blank">here</a></br>
-        <a href="/webhooks">Webhooks</a>
+        View the latest webhooks sent to your app from Wix <a href="/webhooks">here</a><br>
+        Register for webhooks to receive event data from Wix in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/webhooks" target="_blank">Wix Developers</a></br>
       </body>
       </html>`);
 
