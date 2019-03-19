@@ -132,7 +132,7 @@ app.get('/login',async (req, res) => {
         <a href="/payments?token=${refreshToken}">Payments API</a> test
         <p>
         You can define webhooks to receive events from wix <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/webhooks" target="_blank">here</a></br>
-        <a href="/webhooks">Webhooks</a> test
+        <a href="/webhooks">Webhooks</a>
       </body>
       </html>`);
 
