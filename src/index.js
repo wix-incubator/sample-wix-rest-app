@@ -118,20 +118,20 @@ app.get('/login',async (req, res) => {
         <h3>Permissions granted by the user  = ${instance.instance.permissions}<h3>
         <h3>You can add permissions to your application in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/permissions" target="_blank">Wix Developers</a><h3>
         <p>
-        You can see your user's site as described <a href="https://dev.wix.com/docs/api/app-instance/guides/Introduction" target="_blank">here</a></br>
+        You can get your user's site data as described <a href="https://dev.wix.com/docs/api/app-instance/guides/Introduction" target="_blank">here</a></br>
         
         <a href="/instance?token=${refreshToken}">Instance API</a> test
         <p>
-        You can see use the product catalog API as described <a href="https://dev.wix.com/docs/api/stores-catalog/guides/Introduction" target="_blank">here</a></br>
+        You can use the Wix Stores catalog API as described <a href="https://dev.wix.com/docs/api/stores-catalog/guides/Introduction" target="_blank">here</a></br>
         <a href="/products?token=${refreshToken}">Product API</a> test
         <p>
-        You can see use the orders catalog API as described <a href="https://dev.wix.com/docs/api/stores-orders/guides/Introduction" target="_blank">here</a></br>
+        You can use the Wix Stores orders API as described <a href="https://dev.wix.com/docs/api/stores-orders/guides/Introduction" target="_blank">here</a></br>
         <a href="/orders?token=${refreshToken}">Orders API</a> test
         <p>
-        You can see use the payment catalog API as described <a href="https://dev.wix.com/docs/api/payments/guides/Introduction" target="_blank">here</a></br>
+        You can use the Wix payments API as described <a href="https://dev.wix.com/docs/api/payments/guides/Introduction" target="_blank">here</a></br>
         <a href="/payments?token=${refreshToken}">Payments API</a> test
         <p>
-        You can define webhooks to receive events from wix <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/webhooks" target="_blank">here</a></br>
+        You can register for webhooks to receive events from Wix <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/webhooks" target="_blank">here</a></br>
         <a href="/webhooks">Webhooks</a>
       </body>
       </html>`);
@@ -317,7 +317,7 @@ app.get('/webhooks',async (req, res) => {
     </head>
     <body>
       <h1>Application ${APP_ID}</h1>
-      <h3>Webhooks receied from wix:<h3>
+      <h3>Webhooks received from Wix:<h3>
       <pre>${JSON.stringify(incomingWebhooks, null, 2)}</pre>
     </body>
     </html>`);
