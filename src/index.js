@@ -1,13 +1,14 @@
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const path = require('path');
 const config = require('./config');
 const credentials = require('./credentials')
 
 const APP_ID = config.APP_ID;
 const APP_SECRET = credentials.APP_SECRET;
-const WEBHOOK_VERIFICATION_ID = config.WEBHOOK_VERIFICATION_ID;
+const PUBLIC_KEY = config.PUBLIC_KEY;
 const AUTH_PROVIDER_BASE_URL = 'https://www.wix.com/oauth';
 const INSTANCE_API_URL = 'https://dev.wix.com/api/v1';
 const STORE_CATALOG_API_URL = 'https://www.wix.com/_api/catalog-server/api/v1';
@@ -43,10 +44,13 @@ function getAccessToken (refreshToken) {
 
 
 app.post('/webhook-callback', (req, res) => {
-  console.log('got webhook event from Wix:', {data});
+  console.log('got webhook event from Wix!', req.body);
   console.log("===========================");
-  const data = jwt.verify(req.body, WEBHOOK_VERIFICATION_ID);
-  incomingWebhooks.push({body: data, headers: req.headers});
+  const data = jwt.verify(req.body, PUBLIC_KEY);
+  const parsedData =  JSON.parse(data.data);
+  const prettyData = {...data, data: {...parsedData, data: JSON.parse(parsedData.data)}};
+  console.log('webhook event data after verification:', prettyData);
+  incomingWebhooks.push({body: prettyData, headers: req.headers});
   res.send(req.body);
 });
 
@@ -110,7 +114,8 @@ app.get('/login',async (req, res) => {
       <body>
         <h1>Application ${APP_ID} Successfully installed on user's site - ${instance.site.siteDisplayName}<h1>
         <h3>User's site instanceId = ${instance.instance.instanceId}<h3>
-
+        <p>
+        <h3>Permissions granted by the user  = ${instance.instance.permissions}<h3>
         <h3>You can add permissions to your application in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/permissions" target="_blank">Wix Developers</a><h3>
         <p>
         You can see your user's site as described <a href="https://dev.wix.com/docs/api/app-instance/guides/Introduction" target="_blank">here</a></br>
@@ -125,6 +130,9 @@ app.get('/login',async (req, res) => {
         <p>
         You can see use the payment catalog API as described <a href="https://dev.wix.com/docs/api/payments/guides/Introduction" target="_blank">here</a></br>
         <a href="/payments?token=${refreshToken}">Payments API</a> test
+        <p>
+        You can define webhooks to receive events from wix <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/webhooks" target="_blank">here</a></br>
+        <a href="/webhooks">Webhooks</a> test
       </body>
       </html>`);
 
@@ -300,6 +308,21 @@ app.get('/payments',async (req, res) => {
     res.status(500);
   }
 });
+
+app.get('/webhooks',async (req, res) => {
+  res.status(200).send(
+    `<html>
+    <head>
+      <title>Wix Application</title>
+    </head>
+    <body>
+      <h1>Application ${APP_ID}</h1>
+      <h3>Webhooks receied from wix:<h3>
+      <pre>${JSON.stringify(incomingWebhooks, null, 2)}</pre>
+    </body>
+    </html>`);
+});
+
 // this is sample call to Wix instance API - you can find it here: https://dev.wix.com/docs/api/app-instance/guides/Introduction
 async function getAppInstance(refreshToken)
 {
