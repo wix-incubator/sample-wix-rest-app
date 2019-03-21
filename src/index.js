@@ -114,37 +114,6 @@ app.get('/login',async (req, res) => {
                               permissions: instance.instance.permissions, 
                               token: refreshToken,
                               response: JSON.stringify(instance, null, '\t')});
-    return;
-
-    res.status(200).send(
-      `<html>
-      <head>
-        <title>Wix Application</title>
-      </head>
-      <body>
-        <h1>Your app ${APP_ID} has been successfully intalled on a user's site: ${instance.site.siteDisplayName}<h1>
-        <h3>Your user's site instance ID is: ${instance.instance.instanceId}<h3>
-        <p>
-        The user has granted you the following permissions: ${instance.instance.permissions}<br>
-        Request more permissions for your app in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/permissions" target="_blank">Wix Developers</a>
-        <p>
-        Get your user's site data with the <a href="https://dev.wix.com/docs/api/app-instance/guides/Introduction" target="_blank">App Instance API</a>
-        - <a href="/instance?token=${refreshToken}">test</a>
-        <p>
-        Access your user's store catalog with the <a href="https://dev.wix.com/docs/api/stores-catalog/guides/Introduction" target="_blank">Wix Stores Catalog API</a>
-        - <a href="/products?token=${refreshToken}">test</a>
-        <p>
-        Access your user's store orders with the <a href="https://dev.wix.com/docs/api/stores-orders/guides/Introduction" target="_blank">Wix Stores Orders API</a>
-        - <a href="/orders?token=${refreshToken}">test</a>
-        <p>
-        Access your user's paid transactions with the <a href="https://dev.wix.com/docs/api/payments/guides/Introduction" target="_blank">Wix Payments API</a>
-        - <a href="/payments?token=${refreshToken}">test</a>
-        <p>
-        View the latest webhooks sent to your app from Wix <a href="/webhooks">here</a><br>
-        Register for webhooks to receive event data from Wix in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/webhooks" target="_blank">Wix Developers</a></br>
-      </body>
-      </html>`);
-
   } catch (wixError) {
     console.log("Error getting token from Wix");
     console.log({wixError});
@@ -155,8 +124,6 @@ app.get('/login',async (req, res) => {
 app.get('/', (_, res) => {
   res.status(200).send('Hello Wix!')
 });
-
-//app.get('/', (_, res) => res.status(200).send('Hello Wix!'));
   
 app.get('/instance',async (req, res) => {
   
