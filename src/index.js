@@ -22,6 +22,7 @@ const incomingWebhooks = [];
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
+app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'statics')));
 
 function getTokensFromWix (authCode) {
@@ -106,6 +107,15 @@ app.get('/login',async (req, res) => {
     console.log(`User's site instanceId: ${instance.instance.instanceId}`);
     console.log("=============================");
 
+    res.render('login', {  title: 'Wix Application', 
+                              app_id: APP_ID,
+                              site_display_name: instance.site.siteDisplayName,
+                              instance_id: instance.instance.instanceId, 
+                              permissions: instance.instance.permissions, 
+                              token: refreshToken,
+                              response: JSON.stringify(instance, null, '\t')});
+    return;
+
     res.status(200).send(
       `<html>
       <head>
@@ -142,6 +152,12 @@ app.get('/login',async (req, res) => {
     return;
   }});
 
+app.get('/', (_, res) => {
+  res.status(200).send('Hello Wix!')
+});
+
+//app.get('/', (_, res) => res.status(200).send('Hello Wix!'));
+  
 app.get('/instance',async (req, res) => {
   
   const refreshToken = req.query.token;
@@ -150,19 +166,11 @@ app.get('/instance',async (req, res) => {
 
   try {
     instance = await getAppInstance(refreshToken);
-
-    res.status(200).send(
-      `<html>
-      <head>
-        <title>Wix Application</title>
-      </head>
-      <body>
-        <h1>Application ${APP_ID}</h1>
-        <h3>User's site name = ${instance.site.siteDisplayName}<h2>
-        <h3>User's site with instanceId = ${instance.instance.instanceId}<h2>
-        <pre>${JSON.stringify(instance, null, '\t')}</pre>
-      </body>
-      </html>`);
+    res.render('instance', {  title: 'Wix Application', 
+                              app_id: APP_ID,
+                              site_display_name: instance.site.siteDisplayName,
+                              instance_id: instance.instance.instanceId, 
+                              response: JSON.stringify(instance, null, '\t')});
   } catch (wixError) {
     console.log("Error getting token from Wix");
     console.log({wixError});
@@ -182,18 +190,11 @@ app.get('/products',async (req, res) => {
     storeProducts = out.response;
     
     if (storeProducts) {
-      res.status(200).send(
-        `<html>
-        <head>
-          <title>Wix Application</title>
-        </head>
-        <body>
-          <h1>Application ${APP_ID}</h1>
-          <h3>Number of products in the Store is ${storeProducts.totalResults}<h3>
-          <h3>The Wix Store's products:<h3>
-          <pre>${JSON.stringify(storeProducts.products, null, "\t")}</pre>
-        </body>
-        </html>`);
+      
+      res.render('products', {  title: 'Wix Application', 
+                              app_id: APP_ID,
+                              total: storeProducts.totalResults,
+                              response: JSON.stringify(storeProducts.products, null, "\t")});
     } else {
       var message;
       switch (out.code) {
@@ -230,17 +231,10 @@ app.get('/orders',async (req, res) => {
     storeOrders = out.response;
 
     if (storeOrders) {
-      res.status(200).send(
-        `<html>
-        <head>
-          <title>Wix Application</title>
-        </head>
-        <body>
-          <h1>Application ${APP_ID}</h1>
-          <h3>Number of orders in the Store is ${storeOrders.totalResults}<h3>
-          <pre>${JSON.stringify(storeOrders, null, "\t")}</pre>
-        </body>
-        </html>`);
+      res.render('orders', {  title: 'Wix Application', 
+                              app_id: APP_ID,
+                              total: storeOrders.totalResults,
+                              response: JSON.stringify(storeOrders, null, "\t")});
     } else {
       var message;
       switch (out.code) {
@@ -277,17 +271,10 @@ app.get('/payments',async (req, res) => {
     transactions = out.response;
 
     if (transactions) {
-      res.status(200).send(
-        `<html>
-        <head>
-          <title>Wix Application</title>
-        </head>
-        <body>
-          <h1>Application ${APP_ID}</h1>
-          <h3>Number of payments in the site is ${transactions.pagination.total}<h3>
-          <pre>${JSON.stringify(transactions, null, "\t")}</pre>
-        </body>
-        </html>`);
+      res.render('payments', {  title: 'Wix Application', 
+                              app_id: APP_ID,
+                              total: transactions.pagination.total,
+                              response: JSON.stringify(transactions, null, "\t")});
     } else {
       var message;
       switch (out.code) {
@@ -309,17 +296,9 @@ app.get('/payments',async (req, res) => {
 });
 
 app.get('/webhooks',async (req, res) => {
-  res.status(200).send(
-    `<html>
-    <head>
-      <title>Wix Application</title>
-    </head>
-    <body>
-      <h1>Application ${APP_ID}</h1>
-      <h3>Webhooks received from Wix:<h3>
-      <pre>${JSON.stringify(incomingWebhooks, null, 2)}</pre>
-    </body>
-    </html>`);
+  res.render('webhooks', {  title: 'Wix Application', 
+                            app_id: APP_ID, 
+                            webhooks: JSON.stringify(incomingWebhooks, null, 2)});
 });
 
 // this is sample call to Wix instance API - you can find it here: https://dev.wix.com/docs/api/app-instance/guides/Introduction
@@ -432,6 +411,5 @@ async function getPayments(refreshToken)
     return {code: e.response.status};
   }
 };
-app.get('/', (_, res) => res.status(200).send('Hello Wix!'));
 
 app.listen(port, () => console.log(`My Wix Application ${APP_ID} is listening on port ${port}!`));
