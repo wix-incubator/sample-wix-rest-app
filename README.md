@@ -8,7 +8,7 @@ Clone/download the project, configure your application, run & have fun!
 ## Quick start
 1. Create an Application in [Wix Developers](http://dev.wix.com/)
 2. Clone this repo<br/>
-    `git clone git@github.com:shaykewix/sample-wix-rest-app.git`
+    `git clone git@github.com:wix-incubator/sample-wix-rest-app.git`
 3. Update your application data:  
     A. In the config.js:  
         - Update APP_ID with your application ID  
