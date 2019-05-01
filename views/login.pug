@@ -8,16 +8,16 @@ block content
   - permission_url = 'https://dev.wix.com/dc3/my-apps/' + app_id + '/workspace/permissions'
   h3 More permissions for your app in #[a(href=permission_url) Wix Developers]
   - instance_url = '/instance?token=' + token
-  h3 Get your user's site data with the #[a(href='https://dev.wix.com/docs/api/app-instance/guides/Introduction') App Instance API] - #[a(href=instance_url) test]
+  h3 Get your user's site data with the #[a(href='https://dev.wix.com/api/app-management.app-instance.html#get-app-instance') App Instance API] - #[a(href=instance_url) test]
   
   - products_url = '/products?token=' + token
-  h3 Access your user's store catalog with the #[a(href='https://dev.wix.com/docs/api/stores-catalog/guides/Introduction') Wix Stores Catalog API] - #[a(href=products_url) test]
+  h3 Access your user's store catalog with the #[a(href='https://dev.wix.com/api/wix-stores.stores-catalog.html#query-products') Wix Stores Catalog API] - #[a(href=products_url) test]
 
   - orders_url = '/orders?token=' + token
-  h3 Access your user's store orders with the #[a(href='https://dev.wix.com/docs/api/stores-orders/guides/Introduction') Wix Stores Orders API] - #[a(href=orders_url) test]
+  h3 Access your user's store orders with the #[a(href='https://dev.wix.com/api/wix-stores.stores-orders.html#query-orders') Wix Stores Orders API] - #[a(href=orders_url) test]
 
   - payments_url = '/payments?token=' + token
-  h3 Access your user's paid transactions with the #[a(href='https://dev.wix.com/docs/api/payments/guides/Introduction') Wix Payments API] - #[a(href=payments_url) test]
+  h3 Access your user's paid transactions with the #[a(href='https://dev.wix.com/api/wix-payments.payments.html#transactions-list') Wix Payments API] - #[a(href=payments_url) test]
   
   h3 View the latest webhooks sent to your app from Wix #[a(href='/webhooks') here]
   -webhooks_url = 'https://dev.wix.com/dc3/my-apps/' + app_id + '/workspace/webhooks'

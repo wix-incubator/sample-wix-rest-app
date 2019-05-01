@@ -107,6 +107,8 @@ app.get('/login',async (req, res) => {
     console.log(`User's site instanceId: ${instance.instance.instanceId}`);
     console.log("=============================");
 
+    // need to post https://www.wix.com/app-oauth-installation/token-received to notif wix that we finished getting the token
+
     res.render('login', {  title: 'Wix Application', 
                               app_id: APP_ID,
                               site_display_name: instance.site.siteDisplayName,
@@ -268,7 +270,7 @@ app.get('/webhooks',async (req, res) => {
                             webhooks: JSON.stringify(incomingWebhooks, null, 2)});
 });
 
-// this is sample call to Wix instance API - you can find it here: https://dev.wix.com/docs/api/app-instance/guides/Introduction
+// this is sample call to Wix instance API - you can find it here: https://dev.wix.com/api/app-management.app-instance.html#get-app-instance
 async function getAppInstance(refreshToken)
 {
   try {
@@ -300,7 +302,7 @@ async function getAppInstance(refreshToken)
   }
 };
 
-// This is a sample call to the Wix Product API - you can find it here: https://dev.wix.com/docs/api//stores-catalog/reference/product/query-products
+// This is a sample call to the Wix Product API - you can find it here: https://dev.wix.com/api/wix-stores.stores-catalog.html#query-products
 async function getProducts(refreshToken)
 {
   try {
@@ -327,7 +329,7 @@ async function getProducts(refreshToken)
   }
 };
 
-// This is sample call to the Wix Orders API - you can find it here: https://dev.wix.com/docs/api//stores-orders/reference/order--v2/v2-query-orders
+// This is sample call to the Wix Orders API - you can find it here: https://dev.wix.com/api/wix-stores.stores-orders.html#query-orders
 async function getOrders(refreshToken)
 {
   try {
@@ -353,7 +355,7 @@ async function getOrders(refreshToken)
   }
 };
 
-// This is a sample call to the Wix Payments API - you can find it here: https://dev.wix.com/docs/api//payments/reference/transaction/transactions-list
+// This is a sample call to the Wix Payments API - you can find it here: https://dev.wix.com/api/wix-payments.payments.html#transactions-list
 async function getPayments(refreshToken)
 {
   try {
