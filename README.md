@@ -114,5 +114,33 @@ D. Provide consent for the app to collect data by clicking `Allow and Install`:
 E. You should get a print into the browser with your application ID and your site instance ID:
 ![site selector](images/end.png)
 
+## 7. Add a dashboard
+
+A. Click `Components` in the left hand side
+B. Click `Add Dashboard Component`
+
+![site selector](images/dashboard.png)
+
+C. Click `Add Component`
+
+![site selector](images/add-dashboard-component.png)
+
+## 8. Configure dashboard
+
+A. Select `The user’s Wix Dashboard (recommended)`
+B. In **`Page URL`** enter: `https://<12345678>.ngrok.io/dash`  
+**Remember to replace '12345678' with ** your ngrok string you got above.**
+
+![site selector](images/add-dashboard-page.png)
+
+## 9. Test dashboard
+
+A. Go to your test site dashboard
+B. Select Apps on the left hand side
+C. Click `Open` on your new app
+D. You dashboard should dislay with the instance information displayed 
+
+![site selector](images/open-dashboard.png)
+
 # Congrats, you're done!
 ## Now you can add your Application logic and Other WIX APIs.
