@@ -1,5 +1,5 @@
 # Tutorial: Create your first Wix application on your machine
-In this tutorial we go over how to create a Wix application that interacts with the Wix platform that you will can submit to the Wix App Market, where Wix site owners can deploy it on their sites.   
+In this tutorial, we go over how to create a Wix application that interacts with the Wix platform so you will be able to submit it to the Wix App Market, where Wix site owners can deploy it on their sites.
 ## 1. Set up your app in a Wix Developers account 
 A. Log in (or sign up) to [Wix Developers](https://dev.wix.com/).
 
