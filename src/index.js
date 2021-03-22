@@ -10,10 +10,10 @@ const APP_ID = config.APP_ID;
 const APP_SECRET = credentials.APP_SECRET;
 const PUBLIC_KEY = config.PUBLIC_KEY;
 const AUTH_PROVIDER_BASE_URL = 'https://www.wix.com/oauth';
-const INSTANCE_API_URL = 'https://dev.wix.com/api/v1';
-const STORE_CATALOG_API_URL = 'https://www.wix.com/_api/catalog-server/api/v1';
-const STORE_ORDERS_API_URL = 'https://www.wix.com/_api/orders-server/v2/';
-const PAYMENS_API_URL = 'https://cashier.wix.com/_api/payment-services-web/merchant/v2/';
+const INSTANCE_API_URL = 'https://www.wixapis.com/apps/v1';
+const STORE_CATALOG_API_URL = 'https://www.wixapis.com/stores/v1';
+const STORE_ORDERS_API_URL = 'https://www.wixapis.com/stores/v2';
+const PAYMENTS_API_URL = 'https://cashier.wix.com/_api/payment-services-web/merchant/v2';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -369,11 +369,11 @@ async function getPayments(refreshToken)
       },
     };
     const appInstance = axios.create({
-      baseURL: PAYMENS_API_URL,
+      baseURL: PAYMENTS_API_URL,
       headers: {authorization: access_token}
     });
 
-    const response = (await appInstance.get('transactions', body)).data;
+    const response = (await appInstance.get('/transactions', body)).data;
     return {response: response, code: 200};
   } catch (e) {
     console.log({e});
