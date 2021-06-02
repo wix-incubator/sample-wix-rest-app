@@ -1,6 +1,3 @@
-# App Secret
-src/credentials.js
-
 # Logs
 logs
 *.log
@@ -30,3 +27,7 @@ build/
 
 # Misc
 .DS_Store
+
+# Environment variables, incl. App secrets
+.env
+.env.development

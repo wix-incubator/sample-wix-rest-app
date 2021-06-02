@@ -1,8 +1,8 @@
-// TODO: Update APP_ID with your application ID (can be found in in Wix Developers under Workspace/OAuth)
-const APP_ID = 'Enter your APP ID here';
+// APP_ID can be found in in Wix Developers under Workspace/OAuth
+const APP_ID = process.env.WIX_APP_ID;
 
-// TODO: Update PUBLIC_KEY with your public Key (can be found under Workspace/Webhooks/Public-Key)
-const PUBLIC_KEY = 'Enter your PUBLIC KEY here';
+// PUBLIC_KEY can be found under Workspace/Webhooks/Public-Key
+const PUBLIC_KEY = process.env.WIX_APP_ID;
 
 exports.APP_ID = APP_ID;
 exports.PUBLIC_KEY = PUBLIC_KEY;

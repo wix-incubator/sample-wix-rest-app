@@ -109,11 +109,11 @@ app.get('/login',async (req, res) => {
 
     // need to post https://www.wix.com/app-oauth-installation/token-received to notif wix that we finished getting the token
 
-    res.render('login', {  title: 'Wix Application', 
+    res.render('login', {  title: 'Wix Application',
                               app_id: APP_ID,
                               site_display_name: instance.site.siteDisplayName,
-                              instance_id: instance.instance.instanceId, 
-                              permissions: instance.instance.permissions, 
+                              instance_id: instance.instance.instanceId,
+                              permissions: instance.instance.permissions,
                               token: refreshToken,
                               response: JSON.stringify(instance, null, '\t')});
   } catch (wixError) {
@@ -124,21 +124,21 @@ app.get('/login',async (req, res) => {
   }});
 
 app.get('/', (_, res) => {
-  res.status(200).send('Hello Wix!')
+  res.status(200).send('Hello Wix from application: ' + process.env.WIX_APP_ID)
 });
-  
+
 app.get('/instance',async (req, res) => {
-  
+
   const refreshToken = req.query.token;
 
   console.log("refreshToken = " + refreshToken);
 
   try {
     instance = await getAppInstance(refreshToken);
-    res.render('instance', {  title: 'Wix Application', 
+    res.render('instance', {  title: 'Wix Application',
                               app_id: APP_ID,
                               site_display_name: instance.site.siteDisplayName,
-                              instance_id: instance.instance.instanceId, 
+                              instance_id: instance.instance.instanceId,
                               response: JSON.stringify(instance, null, '\t')});
   } catch (wixError) {
     console.log("Error getting token from Wix");
@@ -149,7 +149,7 @@ app.get('/instance',async (req, res) => {
 });
 
 app.get('/products',async (req, res) => {
-  
+
   const refreshToken = req.query.token;
 
   console.log("refreshToken = " + refreshToken);
@@ -157,28 +157,28 @@ app.get('/products',async (req, res) => {
   try {
     out = await getProducts(refreshToken);
     storeProducts = out.response;
-    
+
     if (storeProducts) {
-      
-      res.render('products', {  title: 'Wix Application', 
+
+      res.render('products', {  title: 'Wix Application',
                               app_id: APP_ID,
                               total: storeProducts.totalResults,
                               response: JSON.stringify(storeProducts.products, null, "\t")});
     } else {
       var message;
       switch (out.code) {
-        case 401: 
+        case 401:
           message = `Got 401 - Are you sure you have a Wix Store in your site?`;
           break;
-        case 403: 
+        case 403:
           message = `Got 403 - No Permissions for Stores. You can add permissions to your application in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/permissions">Wix Developers</a>.`;
           break;
-        case 404: 
+        case 404:
           message = 'Got 404 - Check your api route';
           break;
         default:
         message = `Got ${out.code}`;
-      }  
+      }
       res.status(200).send(`<html><body><pre>${message}</pre></body></html>`);
     }
   } catch (wixError) {
@@ -190,35 +190,35 @@ app.get('/products',async (req, res) => {
 });
 
 app.get('/orders',async (req, res) => {
-  
+
   const refreshToken = req.query.token;
 
   console.log("refreshToken = " + refreshToken);
 
   try {
-    out = await getOrders(refreshToken);  
+    out = await getOrders(refreshToken);
     storeOrders = out.response;
 
     if (storeOrders) {
-      res.render('orders', {  title: 'Wix Application', 
+      res.render('orders', {  title: 'Wix Application',
                               app_id: APP_ID,
                               total: storeOrders.totalResults,
                               response: JSON.stringify(storeOrders, null, "\t")});
     } else {
       var message;
       switch (out.code) {
-        case 401: 
+        case 401:
           message = `Got 401 - Are you sure you have a Wix Store in your site?`;
           break;
-        case 403: 
+        case 403:
           message = `Got 403 - No Permissions for orders. You can add permissions to your application in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/permissions">Wix Developers</a>.`;
           break;
-        case 404: 
+        case 404:
           message = 'Got 404 - Check your api route';
           break;
         default:
         message = `Got ${out.code}`;
-      }  
+      }
       res.status(200).send(`<html><body><pre>${message}</pre></body></html>`);
     }
   } catch (wixError) {
@@ -230,7 +230,7 @@ app.get('/orders',async (req, res) => {
 });
 
 app.get('/payments',async (req, res) => {
-  
+
   const refreshToken = req.query.token;
 
   console.log("refreshToken = " + refreshToken);
@@ -240,22 +240,22 @@ app.get('/payments',async (req, res) => {
     transactions = out.response;
 
     if (transactions) {
-      res.render('payments', {  title: 'Wix Application', 
+      res.render('payments', {  title: 'Wix Application',
                               app_id: APP_ID,
                               total: transactions.pagination.total,
                               response: JSON.stringify(transactions, null, "\t")});
     } else {
       var message;
       switch (out.code) {
-        case 403: 
+        case 403:
           message = `Got 403 - No Permissions for payments. You can add permissions to your application in <a href="https://dev.wix.com/dc3/my-apps/${APP_ID}/workspace/permissions">Wix Developers</a>.`;
           break;
-        case 404: 
+        case 404:
           message = 'Got 404 - Check your api route';
           break;
         default:
         message = `Got ${out.code}`;
-      }  
+      }
       res.status(200).send(`<html><body><pre>${message}</pre></body></html>`);
     }
   } catch (wixError) {
@@ -265,8 +265,8 @@ app.get('/payments',async (req, res) => {
 });
 
 app.get('/webhooks',async (req, res) => {
-  res.render('webhooks', {  title: 'Wix Application', 
-                            app_id: APP_ID, 
+  res.render('webhooks', {  title: 'Wix Application',
+                            app_id: APP_ID,
                             webhooks: JSON.stringify(incomingWebhooks, null, 2)});
 });
 
