@@ -116,3 +116,21 @@ E. You should get a print into the browser with your application ID and your sit
 
 # Congrats, you're done!
 ## Now you can add your Application logic and Other WIX APIs.
+
+# Production setup
+
+The application is deployed to AWS as a lambda service using the serverless framework by user `wix-rest-app-serverless`.
+
+Application secrets are available in 1Password, Backend dev vault. Search for "wix-rest-app dotenv file" and save in the 
+project root as `.env`
+
+AWS credentials are available in 1Password, Backend dev vault. Search for "wix-rest-app-serverless_user_credentials.csv"
+Copy those credentials to ~/.aws/credentials in the format:
+
+    [wix-rest-app]
+    aws_access_key_id=...
+    aws_secret_access_key=...
+
+And deploy by running:
+
+    AWS_PROFILE=wix-rest-app sls deploy

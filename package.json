@@ -40,6 +40,7 @@
     "json-server": "^0.16.3",
     "jsonwebtoken": "^8.3.0",
     "pug": "^2.0.3",
+    "serverless-http": "^2.7.0",
     "tslib": "~1.9.3"
   }
 }

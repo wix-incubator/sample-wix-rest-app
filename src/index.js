@@ -1,3 +1,4 @@
+const serverless = require('serverless-http');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -382,3 +383,5 @@ async function getPayments(refreshToken)
 };
 
 app.listen(port, () => console.log(`My Wix Application ${APP_ID} is listening on port ${port}!`));
+
+module.exports.handler = serverless(app);

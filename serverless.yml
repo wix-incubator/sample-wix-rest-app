@@ -1,0 +1,21 @@
+service: wix-rest-app
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http:
+          path: /
+          method: get
+      - http:
+          path: /{proxy+}
+          method: get
+      - http:
+          path: /webhook-callback
+          method: post
+

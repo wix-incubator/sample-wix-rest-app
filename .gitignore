@@ -31,3 +31,6 @@ build/
 # Environment variables, incl. App secrets
 .env
 .env.development
+
+# Serverless generated files
+.serverless
