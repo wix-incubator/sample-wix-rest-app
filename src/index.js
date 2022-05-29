@@ -9,7 +9,7 @@ const credentials = require('./credentials')
 const APP_ID = config.APP_ID;
 const APP_SECRET = credentials.APP_SECRET;
 const PUBLIC_KEY = config.PUBLIC_KEY;
-const AUTH_PROVIDER_BASE_URL = 'https://www.wix.com/oauth';
+const AUTH_PROVIDER_BASE_URL = 'https://www.wixapis.com/oauth/access';
 const INSTANCE_API_URL = 'https://www.wixapis.com/apps/v1';
 const STORE_CATALOG_API_URL = 'https://www.wixapis.com/stores/v1';
 const STORE_ORDERS_API_URL = 'https://www.wixapis.com/stores/v2';
@@ -62,7 +62,7 @@ app.get('/signup', (req, res) => {
   console.log("got a call from Wix for signup");
   console.log("==============================");
 
-  const permissionRequestUrl = 'https://www.wix.com/app-oauth-installation/consent';
+  const permissionRequestUrl = 'https://www.wix.com/installer/install';
   const appId = APP_ID;
   const redirectUrl = `https://${req.get('host')}/login`;
   const token = req.query.token;
@@ -107,7 +107,6 @@ app.get('/login',async (req, res) => {
     console.log(`User's site instanceId: ${instance.instance.instanceId}`);
     console.log("=============================");
 
-    // need to post https://www.wix.com/app-oauth-installation/token-received to notif wix that we finished getting the token
 
     res.render('login', {  title: 'Wix Application', 
                               app_id: APP_ID,
