@@ -84,7 +84,6 @@ E. Run your app
 
 * Browse to the cloned sample application
 * Run `npm install`
-* Run `npm build`
 * Run `npm start`
 
 You should get something like this:
