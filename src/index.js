@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const config = require('./config');
 const credentials = require('./credentials')
+var crypto = require("crypto");
 
 const APP_ID = config.APP_ID;
 const APP_SECRET = credentials.APP_SECRET;
@@ -43,6 +44,33 @@ function getAccessToken (refreshToken) {
   }).then((resp) => resp.data);
 }
 
+function decodeInstance(instance, secret) {
+  try {
+    // spilt the instance into signature and data
+    var pair = instance.split('.');
+    var signature = decode(pair[0], 'binary');
+    var data = pair[1];
+    // sign the data using hmac-sha1-256
+    var hmac = crypto.createHmac('sha256', secret);
+    var newSignature = hmac.update(data).digest('binary');
+
+    console.log(JSON.stringify(signature))
+
+    console.log(Buffer.from(data, 'base64').toString('ascii'))
+    if (signature === newSignature) {
+      return JSON.stringify(Buffer.from(data, 'base64').toString('ascii'), undefined, 2)
+    } else {
+      return "401 - Did you connect through wix?";
+    }
+  } catch(error) {
+    return "500 - Did you connect through wix?";    
+  }
+}
+function decode(data, encoding) {
+  encoding = encoding === undefined ? 'utf8' : encoding
+  var buf = new Buffer(data.replace(/-/g, '+').replace(/_/g, '/'), 'base64')
+  return encoding ? buf.toString(encoding) : buf;
+}
 
 app.post('/webhook-callback', (req, res) => {
   console.log('got webhook event from Wix!', req.body);
@@ -124,6 +152,15 @@ app.get('/login',async (req, res) => {
 
 app.get('/', (_, res) => {
   res.status(200).send('Hello Wix!')
+});
+
+app.get('/dash', (req, res) => {
+  var instanceJSON = decodeInstance(req.query.instance, APP_SECRET);
+
+  // Just displaying it here but really you would get the refresh token (that you have cached)
+  // for the instance and get a token then call what you want in the API
+
+  res.status(200).send(`<html><body><pre>${instanceJSON}</pre></body></html>`)
 });
   
 app.get('/instance',async (req, res) => {
